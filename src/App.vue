@@ -122,6 +122,11 @@ export default {
 .one {
   grid-column: span 2;
   grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  font-size: 1.15rem;
 }
 .two {
   grid-column: 3;

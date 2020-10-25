@@ -7,47 +7,78 @@
               pokemon.id +
               '.png'
             "
-      width="325px"
+      width="275px"
     />
     <h2>{{ pokemon.name }}</h2>
-    <p>{{ description }}</p>
-    <section style="display: flex; justify-content: center;">
-      <div style="width: 250px">
+    <div style="display: flex; justify-content: center;">
+      <h4 v-for="type in pokemon.types" :key="type">
+        <b-badge pill :class="type + ' m-1'">{{ type }}</b-badge>
+      </h4>
+    </div>
+    <br />
+    <div class="descr">{{ description }}</div>
+    <br />
+    <section style="display: flex; align-items: center; flex-flow: column">
+      <div style="width: 400px">
         <h3>Estatísticas</h3>
-        <ul style="text-align: left; list-style-type: none">
-          <li>
+        <div style="display: flex; align-items: center">
+          <div style="width: 175px; text-align: right; padding-right: 5px">
             <b>HP:</b>
-            {{ pokemon.stats.hp }}
-          </li>
-          <li>
+          </div>
+          <div style="flex: auto">
+            <b-progress :value="pokemon.stats.hp" :max="250" variant="danger" show-value />
+          </div>
+        </div>
+        <div style="display: flex; align-items: center">
+          <div style="width: 175px; text-align: right; padding-right: 5px">
             <b>Ataque:</b>
-            {{ pokemon.stats.attack }}
-          </li>
-          <li>
+          </div>
+          <div style="flex: auto">
+            <b-progress :value="pokemon.stats.attack" :max="250" show-value />
+          </div>
+        </div>
+        <div style="display: flex; align-items: center">
+          <div style="width: 175px; text-align: right; padding-right: 5px">
             <b>Defesa:</b>
-            {{ pokemon.stats.defense }}
-          </li>
-          <li>
+          </div>
+          <div style="flex: auto">
+            <b-progress :value="pokemon.stats.defense" :max="250" variant="warning" show-value />
+          </div>
+        </div>
+        <div style="display: flex; align-items: center">
+          <div style="width: 175px; text-align: right; padding-right: 5px">
             <b>Ataque Especial:</b>
-            {{ pokemon.stats.specialAttack }}
-          </li>
-          <li>
+          </div>
+          <div style="flex: auto">
+            <b-progress
+              :value="pokemon.stats.specialAttack"
+              :max="250"
+              variant="secondary"
+              show-value
+            />
+          </div>
+        </div>
+        <div style="display: flex; align-items: center">
+          <div style="width: 175px; text-align: right; padding-right: 5px">
             <b>Defesa Especial:</b>
-            {{ pokemon.stats.specialDefense }}
-          </li>
-          <li>
+          </div>
+          <div style="flex: auto">
+            <b-progress
+              :value="pokemon.stats.specialDefense"
+              :max="250"
+              variant="secondary"
+              show-value
+            />
+          </div>
+        </div>
+        <div style="display: flex; align-items: center">
+          <div style="width: 175px; text-align: right; padding-right: 5px">
             <b>Velocidade:</b>
-            {{ pokemon.stats.speed }}
-          </li>
-        </ul>
-      </div>
-      <div style="width: 250px">
-        <h3>Tipos</h3>
-        <ul style="list-style-type: none;">
-          <h4 v-for="type in pokemon.types" :key="type">
-            <b-badge pill :class="type">{{ type }}</b-badge>
-          </h4>
-        </ul>
+          </div>
+          <div style="flex: auto">
+            <b-progress :value="pokemon.stats.speed" :max="250" variant="success" show-value />
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -64,6 +95,9 @@ export default {
     return {
       description: "",
     };
+  },
+  created() {
+    this.getDescription();
   },
   watch: {
     pokemon: "getDescription",
@@ -88,6 +122,13 @@ export default {
 </script>
 
 <style scoped>
+.descr {
+  margin: 0 auto;
+  background-color: #fffac0;
+  border: 1px solid #dad5a3;
+  border-radius: 10px;
+  padding: 10px;
+}
 ul {
   font-size: 1.15rem;
 }
